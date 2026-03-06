@@ -23,10 +23,10 @@ Download a pre-built release — no git or frontend build tools required on your
 
 > **Important:** Install into `/opt/` or another system directory — not your home directory. The systemd service runs as a dedicated system user that cannot access home directories.
 
-1. Download the latest release tarball from the [Releases page](https://github.com/zercsy/WeightTrackingApp/releases/latest) and replace `vX.X.X` with the actual version:
+1. Find the latest version on the [Releases page](https://github.com/zercsy/WeightTrackingApp/releases) and replace `vX.X.X` with the actual version number:
 
 ```bash
-wget https://github.com/zercsy/WeightTrackingApp/releases/latest/download/weight-tracker-vX.X.X.tar.gz
+wget https://github.com/zercsy/WeightTrackingApp/releases/download/vX.X.X/weight-tracker-vX.X.X.tar.gz
 tar -xzf weight-tracker-vX.X.X.tar.gz
 sudo mv weight-tracker-vX.X.X /opt/WeightTrackingApp
 cd /opt/WeightTrackingApp
