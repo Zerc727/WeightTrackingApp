@@ -17,32 +17,29 @@ A self-hosted web app for logging gym workouts. Track exercises, sets, reps, and
 
 ## Installation
 
-### Production (Linux with systemd)
+### Install from Release (recommended)
 
-> **Important:** Clone into `/opt/` or another system directory — not your home directory. The systemd service runs as a dedicated system user that cannot access home directories.
+Download a pre-built release — no git or frontend build tools required on your server.
+
+> **Important:** Install into `/opt/` or another system directory — not your home directory. The systemd service runs as a dedicated system user that cannot access home directories.
+
+1. Download the latest release tarball from the [Releases page](https://github.com/zercsy/WeightTrackingApp/releases/latest) and replace `vX.X.X` with the actual version:
 
 ```bash
-sudo git clone https://github.com/zercsy/WeightTrackingApp.git /opt/WeightTrackingApp
+wget https://github.com/zercsy/WeightTrackingApp/releases/latest/download/weight-tracker-vX.X.X.tar.gz
+tar -xzf weight-tracker-vX.X.X.tar.gz
+sudo mv weight-tracker-vX.X.X /opt/WeightTrackingApp
 cd /opt/WeightTrackingApp
 sudo ./scripts/setup.sh
 ```
 
 This will:
-- Install server and client dependencies
+- Install server dependencies
 - Generate a `server/.env` with a random JWT secret
 - Run database migrations and create the default admin account
-- Build the Vue frontend
 - Install and start a `weight-tracker` systemd service on port 3000
 
 The app will be available at `http://your-server-ip:3000`.
-
-To update after pulling new changes:
-
-```bash
-cd /opt/WeightTrackingApp
-sudo git pull
-sudo ./scripts/setup.sh
-```
 
 **Useful service commands:**
 ```bash
@@ -50,6 +47,24 @@ sudo systemctl status weight-tracker
 sudo systemctl restart weight-tracker
 sudo systemctl stop weight-tracker
 sudo journalctl -u weight-tracker -f
+```
+
+### Install from Source
+
+Requires git and Node.js 18+ (including npm) on the server.
+
+```bash
+sudo git clone https://github.com/zercsy/WeightTrackingApp.git /opt/WeightTrackingApp
+cd /opt/WeightTrackingApp
+sudo ./scripts/setup.sh
+```
+
+To update after pulling new changes:
+
+```bash
+cd /opt/WeightTrackingApp
+sudo git pull
+sudo ./scripts/setup.sh
 ```
 
 ### Non-Linux / Manual Start
