@@ -2,7 +2,9 @@ const Database = require('better-sqlite3');
 const path = require('path');
 
 const dbPath = process.env.DB_PATH || './data/weights.db';
-const resolvedPath = path.resolve(dbPath);
+const resolvedPath = path.isAbsolute(dbPath)
+  ? dbPath
+  : path.resolve(__dirname, '../../', dbPath);
 
 const db = new Database(resolvedPath);
 
