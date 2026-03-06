@@ -49,6 +49,16 @@ sudo systemctl stop weight-tracker
 sudo journalctl -u weight-tracker -f
 ```
 
+### Updating
+
+To update to the latest release in place (preserves your database and config):
+
+```bash
+sudo /opt/WeightTrackingApp/scripts/update.sh
+```
+
+This will download the latest release, replace the app files, run any new migrations, and restart the service automatically.
+
 ### Install from Source
 
 Requires git and Node.js 18+ (including npm) on the server.
