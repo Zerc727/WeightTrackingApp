@@ -1,0 +1,45 @@
+name: Release
+
+on:
+  push:
+    tags:
+      - 'v*'
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Build frontend
+        run: |
+          cd client
+          npm install
+          npm run build
+
+      - name: Package release tarball
+        run: |
+          VERSION="${GITHUB_REF_NAME}"
+          DIRNAME="weight-tracker-${VERSION}"
+
+          mkdir -p "${DIRNAME}/client"
+          cp -r server "${DIRNAME}/"
+          cp -r client/dist "${DIRNAME}/client/"
+          cp -r scripts "${DIRNAME}/"
+          cp ecosystem.config.js README.md "${DIRNAME}/"
+          rm -rf "${DIRNAME}/server/node_modules"
+
+          tar -czf "weight-tracker-${VERSION}.tar.gz" "${DIRNAME}"
+
+      - name: Create GitHub Release
+        uses: softprops/action-gh-release@v2
+        with:
+          files: weight-tracker-*.tar.gz
+          generate_release_notes: true

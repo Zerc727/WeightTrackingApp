@@ -61,14 +61,18 @@ npm run migrate
 
 # ── Client build ──────────────────────────────────────────────────────────────
 
-echo "→ Installing client dependencies..."
-cd "$APP_DIR/client"
-npm install
+if [ -f "$APP_DIR/client/dist/index.html" ]; then
+  echo "→ Pre-built frontend found, skipping client build."
+else
+  echo "→ Installing client dependencies..."
+  cd "$APP_DIR/client"
+  npm install
 
-echo "→ Building frontend..."
-npm run build
+  echo "→ Building frontend..."
+  npm run build
 
-cd "$APP_DIR"
+  cd "$APP_DIR"
+fi
 
 # ── Systemd installation ──────────────────────────────────────────────────────
 
