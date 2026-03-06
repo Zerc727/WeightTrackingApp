@@ -26,7 +26,7 @@ Download a pre-built release — no git or frontend build tools required on your
 1. Find the latest version on the [Releases page](https://github.com/zercsy/WeightTrackingApp/releases) and replace `vX.X.X` with the actual version number:
 
 ```bash
-wget https://github.com/zercsy/WeightTrackingApp/releases/download/vX.X.X/weight-tracker-vX.X.X.tar.gz
+curl -L -O https://github.com/zercsy/WeightTrackingApp/releases/download/vX.X.X/weight-tracker-vX.X.X.tar.gz
 tar -xzf weight-tracker-vX.X.X.tar.gz
 sudo mv weight-tracker-vX.X.X /opt/WeightTrackingApp
 cd /opt/WeightTrackingApp
