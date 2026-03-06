@@ -19,9 +19,11 @@ A self-hosted web app for logging gym workouts. Track exercises, sets, reps, and
 
 ### Production (Linux with systemd)
 
+> **Important:** Clone into `/opt/` or another system directory — not your home directory. The systemd service runs as a dedicated system user that cannot access home directories.
+
 ```bash
-git clone https://github.com/zercsy/WeightTrackingApp.git
-cd WeightTrackingApp
+sudo git clone https://github.com/zercsy/WeightTrackingApp.git /opt/WeightTrackingApp
+cd /opt/WeightTrackingApp
 sudo ./scripts/setup.sh
 ```
 
@@ -37,7 +39,8 @@ The app will be available at `http://your-server-ip:3000`.
 To update after pulling new changes:
 
 ```bash
-git pull
+cd /opt/WeightTrackingApp
+sudo git pull
 sudo ./scripts/setup.sh
 ```
 

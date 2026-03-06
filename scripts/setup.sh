@@ -25,6 +25,19 @@ if [ "$NODE_VERSION" -lt 18 ]; then
   exit 1
 fi
 
+# ── Location check (systemd service user cannot access home directories) ──────
+
+if [[ "$APP_DIR" == /home/* || "$APP_DIR" == /root/* ]]; then
+  echo "ERROR: App is installed in '$APP_DIR'."
+  echo "  The systemd service user cannot access home or root directories."
+  echo "  Please clone the app to /opt/WeightTrackingApp instead:"
+  echo ""
+  echo "    sudo git clone https://github.com/zercsy/WeightTrackingApp.git /opt/WeightTrackingApp"
+  echo "    cd /opt/WeightTrackingApp && sudo ./scripts/setup.sh"
+  echo ""
+  exit 1
+fi
+
 # ── Server deps ───────────────────────────────────────────────────────────────
 
 echo "→ Installing server dependencies..."
