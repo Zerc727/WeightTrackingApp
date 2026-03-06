@@ -32,7 +32,7 @@ if [[ "$APP_DIR" == /home/* || "$APP_DIR" == /root/* ]]; then
   echo "  The systemd service user cannot access home or root directories."
   echo "  Please clone the app to /opt/WeightTrackingApp instead:"
   echo ""
-  echo "    sudo git clone https://github.com/zercsy/WeightTrackingApp.git /opt/WeightTrackingApp"
+  echo "    sudo git clone https://github.com/Zerc727/WeightTrackingApp.git /opt/WeightTrackingApp"
   echo "    cd /opt/WeightTrackingApp && sudo ./scripts/setup.sh"
   echo ""
   exit 1

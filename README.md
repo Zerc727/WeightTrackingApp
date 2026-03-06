@@ -23,10 +23,10 @@ Download a pre-built release — no git or frontend build tools required on your
 
 > **Important:** Install into `/opt/` or another system directory — not your home directory. The systemd service runs as a dedicated system user that cannot access home directories.
 
-1. Find the latest version on the [Releases page](https://github.com/zercsy/WeightTrackingApp/releases) and replace `vX.X.X` with the actual version number:
+1. Find the latest version on the [Releases page](https://github.com/Zerc727/WeightTrackingApp/releases) and replace `vX.X.X` with the actual version number:
 
 ```bash
-curl -L -O https://github.com/zercsy/WeightTrackingApp/releases/download/vX.X.X/weight-tracker-vX.X.X.tar.gz
+curl -L -O https://github.com/Zerc727/WeightTrackingApp/releases/download/vX.X.X/weight-tracker-vX.X.X.tar.gz
 tar -xzf weight-tracker-vX.X.X.tar.gz
 sudo mv weight-tracker-vX.X.X /opt/WeightTrackingApp
 cd /opt/WeightTrackingApp
@@ -54,7 +54,7 @@ sudo journalctl -u weight-tracker -f
 Requires git and Node.js 18+ (including npm) on the server.
 
 ```bash
-sudo git clone https://github.com/zercsy/WeightTrackingApp.git /opt/WeightTrackingApp
+sudo git clone https://github.com/Zerc727/WeightTrackingApp.git /opt/WeightTrackingApp
 cd /opt/WeightTrackingApp
 sudo ./scripts/setup.sh
 ```
@@ -70,7 +70,7 @@ sudo ./scripts/setup.sh
 ### Non-Linux / Manual Start
 
 ```bash
-git clone https://github.com/zercsy/WeightTrackingApp.git
+git clone https://github.com/Zerc727/WeightTrackingApp.git
 cd WeightTrackingApp
 ./scripts/setup.sh        # installs deps, migrates DB, builds frontend
 cd server
