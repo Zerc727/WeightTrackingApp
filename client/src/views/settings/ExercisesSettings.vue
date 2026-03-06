@@ -2,7 +2,7 @@
   <div>
     <div class="flex items-center justify-between mb-4">
       <h2 class="text-lg font-semibold">Exercises</h2>
-      <button v-if="authStore.isAdmin" @click="showAdd = true" class="btn-primary text-sm px-3 py-1">+ Add</button>
+      <button @click="showAdd = true" class="btn-primary text-sm px-3 py-1">+ Add</button>
     </div>
 
     <AppAlert :message="alert.message" :type="alert.type" />

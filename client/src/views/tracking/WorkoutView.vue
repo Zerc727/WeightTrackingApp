@@ -116,6 +116,16 @@
             <option v-for="e in exercisesStore.exercises" :key="e.id" :value="e.id">{{ e.name }}</option>
           </select>
         </div>
+        <div v-if="!creatingExercise">
+          <button @click="creatingExercise = true" class="text-sm text-indigo-600 dark:text-indigo-400 hover:underline">
+            + Create new exercise
+          </button>
+        </div>
+        <div v-else class="flex gap-2">
+          <input v-model="newExerciseName" type="text" class="input flex-1" placeholder="Exercise name" />
+          <button @click="createAndSelectExercise" :disabled="!newExerciseName" class="btn-primary px-3 py-2 text-sm">Add</button>
+          <button @click="creatingExercise = false; newExerciseName = ''" class="btn-secondary px-3 py-2 text-sm">Cancel</button>
+        </div>
         <AppAlert :message="addExerciseError" />
         <div class="flex justify-end gap-3">
           <button @click="showAddExercise = false" class="btn-secondary px-4 py-2 text-sm">Cancel</button>
@@ -157,6 +167,8 @@ const showAddExercise = ref(false);
 const showDeleteWorkout = ref(false);
 const newExerciseId = ref('');
 const addExerciseError = ref('');
+const creatingExercise = ref(false);
+const newExerciseName = ref('');
 
 const alert = reactive({ message: '', type: 'error' });
 
@@ -211,6 +223,25 @@ async function saveMetadata() {
   }
 }
 
+// Re-fetch when route changes from /new → /:id after creation
+watch(() => route.params.id, async (id) => {
+  if (id) {
+    await workoutsStore.fetchWorkout(id);
+    if (workout.value) {
+      workout.value.exercises.forEach(initExerciseState);
+    }
+  }
+});
+
+// Reset inline-create state when modal closes
+watch(showAddExercise, (val) => {
+  if (!val) {
+    creatingExercise.value = false;
+    newExerciseName.value = '';
+    addExerciseError.value = '';
+  }
+});
+
 // Populate meta form when workout loads
 watch(workout, (w) => {
   if (w && !isNew.value) {
@@ -219,6 +250,17 @@ watch(workout, (w) => {
     meta.notes = w.notes || '';
   }
 }, { immediate: true });
+
+async function createAndSelectExercise() {
+  try {
+    const ex = await exercisesStore.addExercise(newExerciseName.value);
+    newExerciseId.value = ex.id;
+    creatingExercise.value = false;
+    newExerciseName.value = '';
+  } catch (err) {
+    addExerciseError.value = err.response?.data?.error || 'Failed to create exercise';
+  }
+}
 
 async function confirmAddExercise() {
   addExerciseError.value = '';
